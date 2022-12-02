@@ -1,0 +1,40 @@
+.hero {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    &--cover {
+        width: 100%;
+        background-color: salmon;
+        height: 12rem;
+    }
+    &--avatar {
+        width: 12rem;
+        aspect-ratio: 1 / 1;
+        background-color: white;
+        border-radius: 50%;
+        z-index: 2;
+        position: absolute;
+        top: 6rem;
+        left: calc(50% - 96px);
+        overflow: hidden;
+        transition: transform 0.1s;
+        &:hover {
+            transform:scale(1.15);
+            transition: transform 0.1s;
+        }
+        &__img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &--detail {
+        width: 100%;
+        background-color: lightpink;
+        height: 12rem;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        flex-direction: column;
+        padding: 2rem;
+    }
+}

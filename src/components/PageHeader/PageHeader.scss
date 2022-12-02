@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    background-color: grey;
+    align-items: center;
+    padding: 1rem;
+    &--button {
+        height: 50px;
+        width: 50px;
+        border-radius: 10%;
+        background-color: pink;
+    }
+    &--text {
+        font-size: 2rem;
+        margin-block: 0;
+        flex-grow: 1;
+        text-align: center;
+    }
+    &--user{
+        height: 50px;
+        width: 50px;
+        border-radius: 10%;
+        background-color: pink;
+    }
+}
