@@ -1,11 +1,14 @@
-import "./PageHeader.scss"
+import bars from "../../assets/bars-solid.svg"
 
 const PageHeader = () => {
+
     return (
-        <div className="header">
-            <div className="header--button"></div>
-            <p className="header--text">BookHa</p>
-            <div className="header--user"></div>
+        <div className="flex bg-indigo-400 items-center p-4">
+            <div className="h-12 w-12 rounded-md bg-indigo-50 flex justify-center items-center">
+                <img className="w-6" src={bars} alt="" />
+            </div>
+            <p className="flex-1 text-3xl font-semibold mx-0 text-center">BookHa</p>
+            <div className="h-12 w-12 rounded-full bg-indigo-50"></div>
         </div>
     )
 }
