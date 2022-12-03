@@ -1,6 +1,13 @@
+import { NavLink } from "react-router-dom"
+
 const Btn = (props) => {
     return (
-        <div className="flex items-center justify-center w-1/3 font-semibold border-2 border-indigo-400 bg-indigo-400 rounded-2xl h-12 hover:bg-indigo-50 hover:text-indigo-400 transition-all cursor-pointer">{props.text}</div>
+        <div 
+        className="w-1/3 border-indigo-800 bg-indigo-800 h-full text-white hover:bg-indigo-50 hover:text-indigo-600 transition-all cursor-pointer">
+        <NavLink className="flex items-center font-semibold justify-center w-full h-full" to={`${props.path}`}>
+        {props.text}
+        </NavLink>
+        </div>
     )
 }
 
