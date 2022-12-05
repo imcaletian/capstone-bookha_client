@@ -7,6 +7,7 @@ function App() {
     <BrowserRouter>
     <div className="App">
       {/* <ArtistHome /> */}
+      <h1>Hi</h1>
       <Routes>
         <Route path="/artist/id/*" element={<ArtistHome />} />
       </Routes>
