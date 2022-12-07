@@ -6,9 +6,12 @@ import ProfileHero from '../components/ProfileHero/ProfileHero'
 import {Routes, Route} from "react-router-dom"
 
 function ArtistHome () {
+    const [user, loading] = useAuthState(auth);
+
+    console.log(user)
     return (
         <>
-        <PageHeader />
+        <PageHeader userAvt={user.photoURL} />
         <ProfileHero />
         <ActionBar />
         <Routes>
