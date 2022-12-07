@@ -39,7 +39,7 @@ function ArtistPage () {
             const { data, error } = await supabase
             .from ('artist_events')
             .select('*')
-            .eq ('username', id)
+            .contains('username', [`${id}`])
 
             if (error) {
                 console.log("could not fetch event info")
@@ -51,7 +51,6 @@ function ArtistPage () {
         fetchEventInfo()
     }, [id])
     
-    console.log(eventInfo);
     return (
         <>
         <PageHeader artistInfo={artistInfo} />
