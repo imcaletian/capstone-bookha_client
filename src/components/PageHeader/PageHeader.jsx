@@ -7,7 +7,7 @@ const PageHeader = (props) => {
             <div className="h-12 w-12 rounded-md bg-indigo-50 flex justify-center items-center">
                 <img className="w-6" src={bars} alt="" />
             </div>
-            <p className="flex-1 text-3xl font-semibold mx-0 text-center text-white">BookHa</p>
+            <p className="flex-1 text-3xl font-semibold mx-0 text-center text-white">BookEm</p>
             <div className="h-12 w-12 rounded-full bg-indigo-50">
                 {props.userAvt && (
                 <img className="overflow-hidden rounded-full" src={props.userAvt} alt="" />

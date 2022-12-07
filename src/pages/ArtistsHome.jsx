@@ -11,7 +11,7 @@ import { Routes, Route, useParams } from "react-router-dom"
 function ArtistPage () {
     const [fetchError, setFetchError] = useState(null);
     const [artistInfo, setArtistInfo] = useState(null);
-
+    const [eventInfo, setEventInfo] = useState(null);
     const id = useParams().id;
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function ArtistPage () {
             const { data, error } = await supabase
             .from ('artists')
             .select('*')
-            .eq('artistID', id)
+            .eq('username', id)
 
             if (error) {
                 setFetchError('Could Not Fetch Artist Info')
@@ -34,15 +34,31 @@ function ArtistPage () {
         fetchUserInfo()
     }, [id])
 
+    useEffect(() => {
+        const fetchEventInfo = async () => {
+            const { data, error } = await supabase
+            .from ('artist_events')
+            .select('*')
+            .eq ('username', id)
 
+            if (error) {
+                console.log("could not fetch event info")
+            }
+            if (data) {
+                setEventInfo(data)
+            }
+        }
+        fetchEventInfo()
+    }, [id])
     
+    console.log(eventInfo);
     return (
         <>
         <PageHeader artistInfo={artistInfo} />
         <ProfileHero artistInfo={artistInfo}/>
         <ActionBar />
         <Routes>
-            <Route element={<EventList />} path='/' />
+            <Route element={<EventList eventInfo={eventInfo} />} path='/' />
             <Route path='/request' element={<Calendar />} />
             <Route path='/contact' element={<h1>Not Available</h1>} />
         </Routes>

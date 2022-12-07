@@ -1,4 +1,4 @@
-import './App.scss'
+import './App.css'
 import ArtistPage from './pages/ArtistsHome'
 import Landing from './pages/Landing'
 import {Routes, Route, BrowserRouter} from "react-router-dom"
