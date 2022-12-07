@@ -3,16 +3,43 @@ import Calendar from '../components/Calendar'
 import EventList from '../components/EventList'
 import PageHeader from '../components/PageHeader/PageHeader'
 import ProfileHero from '../components/ProfileHero/ProfileHero'
-import {Routes, Route} from "react-router-dom"
+import supabase from '../supabaseClient'
+import { useState, useEffect } from 'react'
+import { Routes, Route, useParams } from "react-router-dom"
 
-function ArtistHome () {
-    const [user, loading] = useAuthState(auth);
 
-    console.log(user)
+function ArtistPage () {
+    const [fetchError, setFetchError] = useState(null);
+    const [artistInfo, setArtistInfo] = useState(null);
+
+    const id = useParams().id;
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            const { data, error } = await supabase
+            .from ('artists')
+            .select('*')
+            .eq('artistID', id)
+
+            if (error) {
+                setFetchError('Could Not Fetch Artist Info')
+                setArtistInfo(null)
+                console.log(error)
+            }
+            if (data) {
+                setArtistInfo(data[0])
+                setFetchError(null)
+            }
+        }
+        fetchUserInfo()
+    }, [id])
+
+
+    
     return (
         <>
-        <PageHeader userAvt={user.photoURL} />
-        <ProfileHero />
+        <PageHeader artistInfo={artistInfo} />
+        <ProfileHero artistInfo={artistInfo}/>
         <ActionBar />
         <Routes>
             <Route element={<EventList />} path='/' />
@@ -23,4 +50,4 @@ function ArtistHome () {
     )
 }
 
-export default ArtistHome
+export default ArtistPage
