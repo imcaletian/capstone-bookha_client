@@ -2,10 +2,11 @@ import ActionBar from '../components/ActionBar/ActionBar'
 import EventList from '../components/EventList'
 import PageHeader from '../components/PageHeader/PageHeader'
 import ProfileHero from '../components/ProfileHero/ProfileHero'
+import Request from '../components/Request'
 import supabase from '../supabaseClient'
 import { useState, useEffect } from 'react'
 import { Routes, Route, useParams } from "react-router-dom"
-import CalComponent from '../components/Calendar'
+
 
 
 function ArtistPage () {
@@ -59,7 +60,7 @@ function ArtistPage () {
         <ActionBar />
         <Routes>
             <Route element={<EventList eventInfo={eventInfo} />} path='/' />
-            <Route path='/request' element={<CalComponent />} />
+            <Route path='/request' element={<Request />} />
             <Route path='/contact' element={<h1>Not Available</h1>} />
         </Routes>
         </>
