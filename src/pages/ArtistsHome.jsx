@@ -1,11 +1,12 @@
 import ActionBar from '../components/ActionBar/ActionBar'
-import Calendar from '../components/Calendar'
 import EventList from '../components/EventList'
 import PageHeader from '../components/PageHeader/PageHeader'
 import ProfileHero from '../components/ProfileHero/ProfileHero'
+import Request from '../components/Request'
 import supabase from '../supabaseClient'
 import { useState, useEffect } from 'react'
 import { Routes, Route, useParams } from "react-router-dom"
+
 
 
 function ArtistPage () {
@@ -40,6 +41,7 @@ function ArtistPage () {
             .from ('artist_events')
             .select('*')
             .contains('username', [`${id}`])
+            .order ('date', { ascending: true })
 
             if (error) {
                 console.log("could not fetch event info")
@@ -58,7 +60,7 @@ function ArtistPage () {
         <ActionBar />
         <Routes>
             <Route element={<EventList eventInfo={eventInfo} />} path='/' />
-            <Route path='/request' element={<Calendar />} />
+            <Route path='/request' element={<Request />} />
             <Route path='/contact' element={<h1>Not Available</h1>} />
         </Routes>
         </>

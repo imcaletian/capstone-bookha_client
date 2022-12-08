@@ -8,7 +8,7 @@ const EventList = (props) => {
             <div className="flex gap-2 flex-col">
             {props.eventInfo !== null ? props.eventInfo
             .map((item)=> {
-                return <EventCard name={item.event_name} key={item.id} date={item.date} time={item.time} location={item.location} link={item.link} />
+                return <EventCard name={item.event_name} key={item.id} date={item.date} time={item.time} location={item.location} link={item.link} img={item.imgUrl} />
             }) : "Loading Event"}
             </div>
         </div>
