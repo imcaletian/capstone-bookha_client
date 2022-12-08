@@ -11,6 +11,10 @@ function Landing () {
         initialValues: {
             email: '',
             password: ''
+        },
+        
+        onSubmit: (values) => {
+            console.log(values)
         }
     })
 
