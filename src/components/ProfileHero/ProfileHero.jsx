@@ -4,7 +4,7 @@ const ProfileHero = (props) => {
 
     console.log(props.artistInfo)
     return (
-        <div className="flex flex-col relative">
+        <div className="flex flex-col relative mt-2">
             <div className="w-full bg-indigo-200 h-48 rounded-t-2xl"></div>
             <div className="w-36 aspect-square bg-white rounded-full overflow-hidden z-10 absolute top-28 left-[calc(50%-4.5rem)] transition-transform hover:scale-110">
                 <img className="hero--avatar__img" src={props.artistInfo !== null ? props.artistInfo.avatar_url : ""} alt="" />
