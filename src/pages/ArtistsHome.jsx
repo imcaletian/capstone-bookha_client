@@ -74,7 +74,7 @@ function ArtistPage () {
 
 
     return (
-        <>
+        <div className="bg-indigo-800">
         <PageHeader userInfo={userInfo} />
         <ProfileHero artistInfo={artistInfo} localId={localId}/>
         <ActionBar />
@@ -83,7 +83,7 @@ function ArtistPage () {
             <Route path='/request' element={<Request />} />
             <Route path='/contact' element={<h1>Not Available</h1>} />
         </Routes>
-        </>
+        </div>
     )
 }
 
