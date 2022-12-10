@@ -1,3 +1,5 @@
+import ActionBar from "./ActionBar/ActionBar"
+
 const DashboardHero = (props) => {
     return (
         <div>
@@ -6,11 +8,6 @@ const DashboardHero = (props) => {
                     <img src={props.artistInfo ? props.artistInfo.avatar_url : "" } alt="userURL" />
                 </div>
                 <h1 className="text-indigo-50 font-semibold text-xl">Hello {props.artistInfo ? props.artistInfo.name : "UserName"}!</h1>
-            </div>
-            <div className="w-full bg-indigo-900 h-14 flex flex-row justify-evenly items-center ">
-                <div className="text-indigo-50 w-24 text-center">Calendar</div>
-                <div className="text-indigo-50 w-24 text-center">Requests</div>
-                <div className="text-indigo-50 w-24 text-center">Setting</div>
             </div>
         </div>
     )

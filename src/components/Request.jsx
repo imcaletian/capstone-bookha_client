@@ -3,9 +3,6 @@ const Request = () => {
         <div>
             <h1>Make a request</h1>
             <form>
-                <label>
-
-                </label>
             </form>
         </div>
     )

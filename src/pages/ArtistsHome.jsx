@@ -32,7 +32,7 @@ function ArtistPage () {
             }
         }
         fetchUserInfo()
-    },[])
+    },[id])
     
     useEffect(() => {
         const fetchArtistInfo = async () => {
@@ -44,7 +44,6 @@ function ArtistPage () {
             if (error) {
                 setFetchError('Could Not Fetch Artist Info')
                 setArtistInfo(null)
-                console.log(error)
             }
             if (data) {
                 setArtistInfo(data[0])
@@ -72,19 +71,19 @@ function ArtistPage () {
         fetchEventInfo()
     }, [id])
 
-    
+
+
     return (
-        <>
+        <div className="bg-indigo-800">
         <PageHeader userInfo={userInfo} />
-        <ProfileHero artistInfo={artistInfo}/>
+        <ProfileHero artistInfo={artistInfo} localId={localId}/>
         <ActionBar />
-        <NavBar userInfo={userInfo}/>
         <Routes>
             <Route element={<EventList eventInfo={eventInfo} />} path='/' />
             <Route path='/request' element={<Request />} />
             <Route path='/contact' element={<h1>Not Available</h1>} />
         </Routes>
-        </>
+        </div>
     )
 }
 
