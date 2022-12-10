@@ -3,20 +3,22 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 
-function Form1() {
+function Form1(props) {
     const nav = useNavigate()
     const userId = localStorage.getItem('bookem_user_id')
     console.log(userId)
     const formik = useFormik({
+
         initialValues: {
-            name: '',
-            username: '',
-            pronouns: '',
-            city: '',
-            province: '',
-            country: '',
-            description: ''
-        },
+            name: `${props.userInfo ? props.userInfo.name : ""}`,
+            username: `${props.userInfo ? props.userInfo.username : ""}`,
+            pronouns: `${props.userInfo ? props.userInfo.pronouns : ""}`,
+            city: `${props.userInfo ? props.userInfo.city : ""}`,
+            province: `${props.userInfo ? props.userInfo.province : ""}`,
+            country: `${props.userInfo ? props.userInfo.country : ""}`,
+            description: `${props.userInfo ? props.userInfo.description : ""}`
+        }
+        ,
 
         onSubmit: (values) => {
             console.log(values);
@@ -30,10 +32,14 @@ function Form1() {
                 country: values.country,
                 description: values.description
             }
-            formHandler(submissionArr)
+            if (props.userInfo) {
+                updateHandler(submissionArr)
+            }else {
+                formHandler(submissionArr)
+            }
         }
     })
-
+    console.log(props.userInfo)
     const formHandler = async (submission) => {
         try {
             const { data, error } = await supabase
@@ -50,6 +56,24 @@ function Form1() {
             nav('/dashboard')
         }
     }
+
+    const updateHandler = async (submission) => {
+        try {
+            const { data, error } = await supabase
+                .from('artists')
+                .update([submission])
+                .eq('id', userId)
+            if (error) throw error;
+        }
+        catch(error) {
+            alert(error.error_description || error.message)
+        }
+        finally {
+            alert ('Changes made!')
+            nav('/dashboard')
+        }
+    }
+
 
     console.log(formik.values)
 
@@ -84,7 +108,7 @@ function Form1() {
                 Description
             </label>
             <textarea name="description" className="h-36" onChange={formik.handleChange} value={formik.values.description} />
-            <input type="submit" value="Submit" className="bg-indigo-50 p-4" />
+            <input type="submit" value={props.userInfo ? "Update" : "Submit"} className="bg-indigo-50 p-4" />
         </form>
     )
 }
