@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Form1(props) {
     const nav = useNavigate()
     const userId = localStorage.getItem('bookem_user_id')
-    console.log(userId)
+    
     const formik = useFormik({
 
         initialValues: {
@@ -53,7 +53,7 @@ function Form1(props) {
         }
         finally {
             console.log("success")
-            nav('/dashboard')
+            nav('/home')
         }
     }
 
@@ -69,8 +69,8 @@ function Form1(props) {
             alert(error.error_description || error.message)
         }
         finally {
-            alert ('Changes made!')
-            nav('/home')
+            alert ('Changes made!');
+            nav(-1)
         }
     }
 
