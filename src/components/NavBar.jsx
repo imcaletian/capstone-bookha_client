@@ -33,7 +33,7 @@ export default function NavBar(props) {
                     </div>
                     <div>
                     </div>
-                        <Link to="/dashboard">
+                        <Link to="/home">
                             <div className="p-4 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-indigo-800 ">Home</div>
                         </Link>
                         <Link to={`/artist/${props.userInfo.username}`}>
