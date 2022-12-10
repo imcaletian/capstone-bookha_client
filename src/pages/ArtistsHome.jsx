@@ -6,7 +6,6 @@ import Request from '../components/Request'
 import supabase from '../supabaseClient'
 import { useState, useEffect } from 'react'
 import { Routes, Route, useParams } from "react-router-dom"
-import NavBar from '../components/NavBar'
 
 function ArtistPage () {
     const localId = localStorage.getItem("bookem_user_id")
@@ -32,7 +31,7 @@ function ArtistPage () {
             }
         }
         fetchUserInfo()
-    },[id])
+    },[])
     
     useEffect(() => {
         const fetchArtistInfo = async () => {
@@ -40,7 +39,6 @@ function ArtistPage () {
             .from ('artists')
             .select('*')
             .eq('username', id)
-
             if (error) {
                 setFetchError('Could Not Fetch Artist Info')
                 setArtistInfo(null)
@@ -51,7 +49,7 @@ function ArtistPage () {
             }
         }
         fetchArtistInfo()
-    }, [id])
+    }, [])
 
     useEffect(() => {
         const fetchEventInfo = async () => {
@@ -69,8 +67,7 @@ function ArtistPage () {
             }
         }
         fetchEventInfo()
-    }, [id])
-
+    }, [])
 
 
     return (
@@ -80,7 +77,7 @@ function ArtistPage () {
         <ActionBar />
         <Routes>
             <Route element={<EventList eventInfo={eventInfo} />} path='/' />
-            <Route path='/request' element={<Request />} />
+            <Route path='/request' element={<Request localId={localId} artistInfo={artistInfo} />} />
             <Route path='/contact' element={<h1>Not Available</h1>} />
         </Routes>
         </div>
