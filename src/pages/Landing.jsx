@@ -62,7 +62,7 @@ function Landing() {
         console.log(data)
         localStorage.setItem("bookem_token", data.session.access_token)
         localStorage.setItem("bookem_user_id", data.user.id)
-        nav ('/dashboard')
+        nav ('/home')
         }
         catch(error){
             alert(error.error_description || error.message)
