@@ -66,15 +66,10 @@ const Dashboard = () => {
         { artistInfo && 
             (<div className="bg-indigo-800 h-max">
             <PageHeader userInfo={artistInfo}/>
-            <DashboardHero artistInfo={artistInfo} />
             <div className="flex flex-wrap justify-center items-center ">
-                <DashboardCard eventInfo={eventInfo} />
+                <DashboardCard eventInfo={eventInfo} artistInfo={artistInfo} />
             </div>
             </div>)
-        }
-        {
-          !artistInfo &&
-            nav('/setup')
         }
         </>
     )

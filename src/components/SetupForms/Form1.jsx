@@ -1,7 +1,7 @@
 import supabase from "../../supabaseClient"
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Form1(props) {
     const nav = useNavigate()
@@ -70,16 +70,12 @@ function Form1(props) {
         }
         finally {
             alert ('Changes made!')
-            nav('/dashboard')
+            nav('/home')
         }
     }
 
-
-    console.log(formik.values)
-
-
     return (
-        <form className="flex flex-col gap-2 [&>label]:text-white [&>input]:p-2" onSubmit={formik.handleSubmit} >
+        <form className="flex flex-col gap-2 mx-10 p-10 max-w-xl [&>label]:text-indigo-900 [&>label]:select-none [&>label]:font-semibold [&>input]:p-2 [&>input]:rounded-lg" onSubmit={formik.handleSubmit} >
             <label>
                 Aritst Name
             </label>
@@ -107,8 +103,10 @@ function Form1(props) {
             <label>
                 Description
             </label>
-            <textarea name="description" className="h-36" onChange={formik.handleChange} value={formik.values.description} />
-            <input type="submit" value={props.userInfo ? "Update" : "Submit"} className="bg-indigo-50 p-4" />
+            <textarea name="description" className="h-36 p-2 rounded-lg resize-none" onChange={formik.handleChange} value={formik.values.description} />
+            <div className="flex justify-between my-3">
+            <input type="submit" value={props.userInfo ? "Update" : "Submit"} className="bg-indigo-50 p-3 w-full rounded-lg cursor-pointer" />
+            </div>
         </form>
     )
 }
