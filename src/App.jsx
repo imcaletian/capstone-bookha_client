@@ -3,6 +3,7 @@ import ArtistPage from './pages/ArtistsHome'
 import Landing from './pages/Landing'
 import Dashboard from './pages/Dashboard'
 import {Routes, Route, BrowserRouter} from "react-router-dom"
+import ArtistSetUp from './pages/ArtistSetUp'
 
 function App() {
 
@@ -12,7 +13,8 @@ function App() {
       <Routes>
         <Route path="/*" element={<Landing />} />
         <Route path="/artist/:id/*" element={<ArtistPage />} />
-        <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/dashboard/" element={<Dashboard />} />
+        <Route path="/setup" element={<ArtistSetUp />} />
       </Routes>
     </div>
     </BrowserRouter>

@@ -6,17 +6,36 @@ import Request from '../components/Request'
 import supabase from '../supabaseClient'
 import { useState, useEffect } from 'react'
 import { Routes, Route, useParams } from "react-router-dom"
-
-
+import NavBar from '../components/NavBar'
 
 function ArtistPage () {
+    const localId = localStorage.getItem("bookem_user_id")
     const [fetchError, setFetchError] = useState(null);
     const [artistInfo, setArtistInfo] = useState(null);
     const [eventInfo, setEventInfo] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
     const id = useParams().id;
-
     useEffect(() => {
         const fetchUserInfo = async () => {
+            const { data, error } = await supabase
+            .from ('artists')
+            .select('*')
+            .eq('id', localId)
+
+            if (error) {
+                setFetchError('Could Not Fetch Info')
+                setUserInfo(null)
+            }
+            if (data) {
+                setUserInfo(data[0])
+                setFetchError(null)
+            }
+        }
+        fetchUserInfo()
+    },[])
+    
+    useEffect(() => {
+        const fetchArtistInfo = async () => {
             const { data, error } = await supabase
             .from ('artists')
             .select('*')
@@ -32,7 +51,7 @@ function ArtistPage () {
                 setFetchError(null)
             }
         }
-        fetchUserInfo()
+        fetchArtistInfo()
     }, [id])
 
     useEffect(() => {
@@ -52,12 +71,14 @@ function ArtistPage () {
         }
         fetchEventInfo()
     }, [id])
+
     
     return (
         <>
-        <PageHeader artistInfo={artistInfo} />
+        <PageHeader userInfo={userInfo} />
         <ProfileHero artistInfo={artistInfo}/>
         <ActionBar />
+        <NavBar userInfo={userInfo}/>
         <Routes>
             <Route element={<EventList eventInfo={eventInfo} />} path='/' />
             <Route path='/request' element={<Request />} />
