@@ -18,6 +18,7 @@ const Dashboard = () => {
     const [eventInfo, setEventInfo] = useState(null);
     const [artistInfo, setArtistInfo] = useState(null);
     const [requestsInfo, SetRequestInfo] = useState(null);
+    const [sentRequests, SetSentRequests] = useState(null);
     const now = defaultDate.toISOString();
     useEffect(() => {
         const fetchArtistInfo = async () => {
@@ -74,6 +75,22 @@ const Dashboard = () => {
         fetchRequests()
     }, [id])
 
+    useEffect (()=> {
+        const fetchSentRequests = async () => {
+            const {data, error} = await supabase
+            .from ('requests')
+            .select('*')
+            .eq('created_by', [`${id}`])
+            if (error) {
+                console.log("could not fetch request info")
+            }
+            if (data) {
+                SetSentRequests(data)
+            }
+        }
+        fetchSentRequests()
+    }, [id])
+
 
     return (
         <>
@@ -81,7 +98,7 @@ const Dashboard = () => {
             (<div className="bg-indigo-800 h-max">
             <PageHeader userInfo={artistInfo}/>
             <div className="flex flex-wrap justify-center items-center ">
-                <DashboardSection eventInfo={eventInfo} artistInfo={artistInfo} requestsInfo={requestsInfo} />
+                <DashboardSection eventInfo={eventInfo} artistInfo={artistInfo} requestsInfo={requestsInfo} sentRequests={sentRequests}/>
             </div>
             </div>)
         }
