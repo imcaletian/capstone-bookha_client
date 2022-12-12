@@ -80,10 +80,16 @@ function Form1(props) {
                 Aritst Name
             </label>
             <input type="text" name="name" placeholder="" onChange={formik.handleChange} value={formik.values.name} />
+            
+            { !props.userInfo && 
+            <>
             <label>
                 User Name
             </label>
             <input type="text" name="username" placeholder="" onChange={formik.handleChange} value={formik.values.username} />
+            </>
+            }
+
             <label>
                 Pronouns
             </label>
