@@ -14,6 +14,9 @@ function ArtistPage () {
     const [eventInfo, setEventInfo] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
     const id = useParams().id;
+    const date = new Date ();
+    const now = date.toISOString();
+
     useEffect(() => {
         const fetchUserInfo = async () => {
             const { data, error } = await supabase
@@ -57,7 +60,8 @@ function ArtistPage () {
             .from ('artist_events')
             .select('*')
             .contains('username', [`${id}`])
-            .order ('date', { ascending: true })
+            .gt('timestamp', now)
+            .order ('timestamp', { ascending: true })
 
             if (error) {
                 console.log("could not fetch event info")
