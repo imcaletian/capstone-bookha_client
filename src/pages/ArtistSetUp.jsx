@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import PageHeader from "../components/PageHeader/PageHeader";
 import Form1 from "../components/SetupForms/Form1"
-import UploadAvt from "../components/UploadAvt";
+import backArrow from "../assets/chevron-left-solid.svg"
 import supabase from "../supabaseClient";
+import { NavLink } from "react-router-dom";
 function ArtistSetUp () {
     const localId = localStorage.getItem("bookem_user_id")
     const [userInfo, setUserInfo] = useState ("")
@@ -38,6 +39,13 @@ function ArtistSetUp () {
         }
         {userInfo && 
             <div className="bg-indigo-900 min-h-screen rounded-2xl mt-2 ">
+                <div className="w-16 p-4">
+                <NavLink to={-1}>
+                    <div className="rounded-lg bg-indigo-50 p-2 w-16 flex justify-center m-0">
+                    <img className="w-5 " src={backArrow} alt="" />
+                    </div>
+                </NavLink>
+                </div>
             <div className="h-36 flex items-center justify-center">
             <h1 className="text-center text-2xl text-white">Hello <b>{userInfo.name}</b>! Edit Your Artist Information Here!</h1>
             </div>
