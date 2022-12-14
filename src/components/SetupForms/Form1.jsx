@@ -39,7 +39,6 @@ function Form1(props) {
             }
         }
     })
-    console.log(props.userInfo)
     const formHandler = async (submission) => {
         try {
             const { data, error } = await supabase
@@ -56,6 +55,7 @@ function Form1(props) {
             nav('/home')
         }
     }
+
 
     const updateHandler = async (submission) => {
         try {
@@ -77,10 +77,9 @@ function Form1(props) {
     return (
         <form className="flex flex-col gap-2 mx-10 p-10 max-w-xl [&>label]:text-indigo-900 [&>label]:select-none [&>label]:font-semibold [&>input]:p-2 [&>input]:rounded-lg" onSubmit={formik.handleSubmit} >
             <label>
-                Aritst Name
+                Display Name
             </label>
             <input type="text" name="name" placeholder="" onChange={formik.handleChange} value={formik.values.name} />
-            
             { !props.userInfo && 
             <>
             <label>
