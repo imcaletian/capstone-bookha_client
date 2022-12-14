@@ -81,7 +81,7 @@ function ArtistPage () {
         <ActionBar />
         <Routes>
             <Route element={<EventList eventInfo={eventInfo} />} path='/' />
-            <Route path='/request' element={<Request localId={localId} artistInfo={artistInfo} />} />
+            <Route path='/request' element={<Request userInfo={userInfo} localId={localId} artistInfo={artistInfo} />} />
             <Route path='/contact' element={<h1>Not Available</h1>} />
         </Routes>
         </div>
