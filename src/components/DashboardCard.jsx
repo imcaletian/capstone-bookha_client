@@ -14,7 +14,7 @@ const DashboardSection = (props) => {
             <Events eventInfo={props.eventInfo}  />
              </Card>
             <Card>
-            <Requests requestsInfo={props.requestsInfo} />
+            <Requests requestsInfo={props.requestsInfo}  />
             </Card>
             <Card>
             <SentRequests sentRequests={props.sentRequests} />
@@ -38,7 +38,6 @@ const DashboardHero = (props) => {
 
 
 const Requests = (props) => {
-console.log(props.requestsInfo)
     return (
         <div className="w-full">
             <div className="p-4 flex justify-center">
@@ -52,7 +51,7 @@ console.log(props.requestsInfo)
                     .map((item) => {
                         const date = new Date (item.request_timestamp)
                         const dateFormatted = date.toLocaleString()                    
-                        return <RequestCard key={item.request_id} id={item.request_id} date={dateFormatted} location={item.location} detail={item.description} />
+                        return <RequestCard key={item.request_id} id={item.request_id} date={dateFormatted} location={item.location} detail={item.description} created_by={item.created_by}/>
                     }) : "Loading Event"}
             </div>
         </div>
@@ -74,7 +73,7 @@ const SentRequests = (props) => {
                             const date = new Date (item.request_timestamp)
                             const dateFormatted = date.toLocaleString()                        
                             return <RequestCard key={item.request_id} id={item.request_id} date={dateFormatted} location={item.location} detail={item.description} />
-                        }) : "Loading Event"}
+                        }) : ""}
                 </div>
             </div>
         )
@@ -82,6 +81,7 @@ const SentRequests = (props) => {
     
 
 const RequestCard = (props) => {
+
     return (
         <div className="flex flex-row items-center bg-indigo-800 rounded-2xl m-2 py-4 w-[95%]" id={props.id}>
                 <div className="flex-1 flex-col flex gap-3">
@@ -102,11 +102,9 @@ const RequestCard = (props) => {
 
 const EventCard = (props) => {
     
-
-    
     return (
         <div className="flex flex-row items-center bg-indigo-800 rounded-2xl m-2 py-4 w-[95%]" id={props.id}>
-            <div className="w-32 h-32 overflow-hidden mx-3 rounded-2xl shadow-2xl">
+            <div className="w-32 h-32 overflow-hidden mx-3 rounded-lg shadow-2xl">
                 <img src={props.img} className="object-cover h-full w-full" alt="event photo" />
             </div>
             <div className="flex-1 flex-col flex gap-3">

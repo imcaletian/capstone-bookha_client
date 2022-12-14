@@ -82,13 +82,13 @@ function Landing() {
                 })
             if (error) throw error;
             if (data) throw data;
-            alert("Check your email for the login link!")
         }
         catch (error) {
             alert(error.error_description || error.message)
         }
         finally {
-            setLoading(false)
+            alert("Check your email for the login link!")
+            nav('/')
         }
     }
 

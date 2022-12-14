@@ -107,6 +107,10 @@ const Dashboard = () => {
             </div>
             </div>)
         }
+        {
+            !artistInfo && 
+            nav('/setup')
+        }
         </>
     )
 }
