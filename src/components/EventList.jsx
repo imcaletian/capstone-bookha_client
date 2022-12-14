@@ -6,7 +6,7 @@ const EventCard = (props) => {
             </div>
             <div className="w-1/2 flex flex-col gap-1 justify-center items-center flex-1">
                 <h2 className=" text-center font-semibold text-indigo-50">{props.name}</h2>
-                <p className=" font-extralight text-indigo-50 text-sm ">{props.date}, {props.time}</p>
+                <p className=" font-extralight text-indigo-50 text-sm ">{props.timestamp}</p>
                 <p className=" font-extralight text-indigo-50 text-sm ">{props.location}</p>
                 <a href={props.link}><div className="font-regular text-sm w-fit uppercase border-2 border-indigo-400 p-2 mt-2 font-semibold rounded-sm bg-indigo-400 hover:bg-indigo-900 hover:text-indigo-50 cursor-pointer">Get Tickets</div></a>
             </div>
@@ -21,7 +21,9 @@ const EventList = (props) => {
             <div className="flex gap-1 flex-col">
             {props.eventInfo !== null ? props.eventInfo
             .map((item)=> {
-                return <EventCard name={item.event_name} key={item.id} date={item.date} time={item.time} location={item.location} link={item.link} img={item.imgUrl} />
+                const date = new Date (item.timestamp)
+                const dateFormatted = date.toLocaleString()
+                return <EventCard name={item.event_name} key={item.id}  timestamp={dateFormatted} location={item.location} link={item.link} img={item.imgUrl} />
             }) : "Loading Event"}
             </div>
         </div>

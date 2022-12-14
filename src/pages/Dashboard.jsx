@@ -1,8 +1,10 @@
 import PageHeader from "../components/PageHeader/PageHeader"
 import { useState, useEffect } from "react";
 import supabase from "../supabaseClient";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import DashboardSection from "../components/DashboardCard";
+import Modal from "../components/Modal";
+import AddNewEvent from "./AddNewEvent";
 
 
 const Dashboard = () => {
@@ -98,7 +100,10 @@ const Dashboard = () => {
             (<div className="bg-indigo-800 h-max">
             <PageHeader userInfo={artistInfo}/>
             <div className="flex flex-wrap justify-center items-center ">
-                <DashboardSection eventInfo={eventInfo} artistInfo={artistInfo} requestsInfo={requestsInfo} sentRequests={sentRequests}/>
+            <Routes>
+                <Route path="/" element={<DashboardSection eventInfo={eventInfo} artistInfo={artistInfo} requestsInfo={requestsInfo} sentRequests={sentRequests}/>} />
+                <Route path="/add" element={<AddNewEvent artistInfo={artistInfo}/>} />
+            </Routes>
             </div>
             </div>)
         }

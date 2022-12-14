@@ -16,8 +16,10 @@ export default function NavBar(props) {
         }
         finally {
             alert("Logout sucessful, now taking you back to login page")
+            props.navShow()
         }
     }
+    console.log(props)
     return (
         <>
             {
@@ -33,17 +35,17 @@ export default function NavBar(props) {
                         </div>
                 </div>
                 <div className="">
-                        <Link to="/home">
+                        <Link to="/home" onClick={props.navShow}> 
                             <div className="p-5 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-indigo-800 ">Home</div>
                         </Link>
-                        <Link to={`/artist/${props.userInfo.username}`}>
+                        <Link to={`/artist/${props.userInfo.username}`} onClick={props.navShow}>
                             <div className="p-5 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-indigo-800">My Artist Page</div>
                         </Link>
-                        <Link to="/setup">
+                        <Link to="/setup" onClick={props.navShow}>
                             <div className="p-5 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-indigo-800">
                                 Settings
                             </div>
-                        </Link>
+                        </Link> 
                         <Link onClick={LogoutHandler}>
                             <div className="p-5 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-red-600">
                                 Log Out
@@ -61,10 +63,10 @@ export default function NavBar(props) {
                         <h2 className="text-indigo-50 text-sm font-light">Bookem is a easy way to book your favourite indie artists!</h2>
                     </div>
                     <div>
-                        <Link to="/">
+                        <Link to="/" onClick={props.navShow}>
                             <div className="p-4 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-50 hover:text-indigo-800 ">Sign In</div>
                         </Link>
-                        <Link to={`/signup`}>
+                        <Link to={`/signup`} onClick={props.navShow}>
                             <div className="p-4 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-50 hover:text-indigo-800">Sign Up</div>
                         </Link>
                     </div>

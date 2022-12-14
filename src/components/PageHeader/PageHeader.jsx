@@ -26,7 +26,7 @@ const PageHeader = (props) => {
                 <div className={nav === true ? "h-12 w-12 rounded-full bg-indigo-50 opacity-0 transition-opacity" : "h-12 w-12 rounded-full bg-indigo-50 transition-opacity"}>
                     <img className="overflow-hidden rounded-full" src={props.userInfo ? props.userInfo.avatar_url : ""} alt="" />
                 </div>
-                <NavBar userInfo={props.userInfo} visible={nav} setNav={setNav}/>
+                <NavBar userInfo={props.userInfo} visible={nav} navShow={navShow}/>
             </div>}
         {!props.userInfo && 
             <div className="flex bg-indigo-800 items-center justify-center px-4 py-2 relative z-50">
@@ -39,7 +39,7 @@ const PageHeader = (props) => {
                 <div className="h-12 w-12 rounded-full bg-indigo-50 invisible">
                     <img className="overflow-hidden rounded-full" src={props.userInfo ? props.userInfo.avatar_url : ""} alt="" />
                 </div>
-                <NavBar visible={nav} hide={navShow} />
+                <NavBar visible={nav} navShow={navShow} />
             </div>
         }
         </>
