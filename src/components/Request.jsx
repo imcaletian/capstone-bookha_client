@@ -62,7 +62,7 @@ const Request = (props) => {
                         <h1 className="font-semibold py-4">Make a request</h1>
                         <form className="flex flex-col items-center" onSubmit={formik.handleSubmit}>
                             <h1 className="pb-2">Pick A Date and Time</h1>
-                            <div className="flex flex-wrap justify-center items-center gap-3">
+                            <div className="flex flex-wrap flex-col justify-center items-center gap-3">
                                 <div className="w-80 flex justify-between">
                                     <label className="text-left w-10">From</label>
                                     <DateTimePicker onChange={onChange} value={date} />
@@ -106,12 +106,12 @@ const Request = (props) => {
                             <h1 className="font-semibold py-4">Make a request</h1>
                             <form className="flex flex-col items-center" onSubmit={formik.handleSubmit}>
                                 <h1 className="pb-2">Pick A Date and Time</h1>
-                                <div className="flex flex-wrap justify-center items-center gap-3">
-                                    <div className="w-80 flex justify-between">
+                                <div className="flex flex-wrap justify-center items-center gap-3 flex-col">
+                                    <div className="w-80 flex justify-between flex-col">
                                         <label className="text-left w-10">From</label>
                                         <DateTimePicker onChange={onChange} value={date} />
                                     </div>
-                                    <div className="w-80 flex justify-between">
+                                    <div className="w-80 flex justify-between flex-col">
                                         <label className="text-left w-10">To</label>
                                         <DateTimePicker onChange={setTill} value={till} />
                                     </div>

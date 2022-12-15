@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 
 export default function Login(props) {
-
     return (
         <>
             <p className="text-xl py-2">A better way to book 'em!</p>
@@ -21,4 +20,3 @@ export default function Login(props) {
         </>
     )
 }
-

@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import DateTimePicker from "react-datetime-picker";
-// import 'react-datetime-picker/dist/DateTimePicker.css'; 
-import ImageUpload from "../ImageUpload";
 import { useFormik } from "formik";
 import supabase from "../../supabaseClient";
 import { useNavigate } from "react-router-dom";
