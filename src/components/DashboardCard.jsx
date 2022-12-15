@@ -4,6 +4,8 @@ import addIcon from "../assets/square-plus-solid.svg"
 import { useState, useRef } from "react"
 import Modal from "./Modal"
 import { Link } from "react-router-dom"
+import { useEffect } from "react"
+import supabase from "../supabaseClient"
 
 
 const DashboardSection = (props) => {
@@ -51,7 +53,7 @@ const Requests = (props) => {
                     .map((item) => {
                         const date = new Date (item.request_timestamp)
                         const dateFormatted = date.toLocaleString()                    
-                        return <RequestCard key={item.request_id} id={item.request_id} date={dateFormatted} location={item.location} detail={item.description} created_by={item.created_by}/>
+                        return <RequestCard key={item.request_id} id={item.request_id} date={dateFormatted} location={item.location} detail={item.description} created_by={item.created_by} text="From" type="incoming"/>
                     }) : "Loading Event"}
             </div>
         </div>
@@ -72,7 +74,7 @@ const SentRequests = (props) => {
                         .map((item) => {
                             const date = new Date (item.request_timestamp)
                             const dateFormatted = date.toLocaleString()                        
-                            return <RequestCard key={item.request_id} id={item.request_id} date={dateFormatted} location={item.location} detail={item.description} />
+                            return <RequestCard key={item.request_id} id={item.request_id} date={dateFormatted} location={item.location} detail={item.description} created_by={item.sent_to} text="Sent To" type="outgoing"/>
                         }) : ""}
                 </div>
             </div>
@@ -81,21 +83,65 @@ const SentRequests = (props) => {
     
 
 const RequestCard = (props) => {
+    const [userName, setUserName] = useState ('')
+
+    useEffect(() => {
+        const getUserInfo = async () => {
+            const { data , error } = await supabase
+            .from('artists')
+            .select('name')
+            .match({id : props.created_by})
+            if (error) {
+                console.log(error)
+            }
+            if (data) {
+                setUserName(data[0])
+                console.log(data[0])
+            }
+        }
+        getUserInfo()
+    }, [props.created_by])
 
     return (
-        <div className="flex flex-row items-center bg-indigo-800 rounded-2xl m-2 py-4 w-[95%]" id={props.id}>
-                <div className="flex-1 flex-col flex gap-3">
-                    <div className="flex flex-col gap-1 justify-center items-center ">
-                        <h2 className=" text-center font-semibold text-indigo-50">{props.created_by}</h2>
-                        <p className=" font-extralight text-indigo-50 text-sm ">{props.location}</p>
-                        <p className=" font-extralight text-indigo-50 text-sm ">{props.date}</p>
-                        <p className=" font-extralight text-indigo-50 text-sm ">{props.detail}</p>
+        <div className="flex items-center rounded-2xl m-3 shadow-lg bg-indigo-900 overflow-hidden" id={props.id} >
+                <div className="p-4 h-48 bg-rose-600 flex items-center text-indigo-50 font-semibold hover:bg-rose-900 transition-all cursor-pointer">Decline</div>
+                <div className="flex-1 flex-col flex gap-3 w-[50%]">
+                    <div className="flex flex-col gap-1 justify-center items-start py-5 px-6">
+                        <div className="flex gap-1">
+                        <h2 className="font-semibold text-indigo-50 capitalize w-[4.6rem]">{props.text}:</h2>
+                        <p className="font-semibold text-indigo-50 capitalize">{userName.name}</p>
+                        </div>
+                        <div className="flex gap-1">
+                        <h2 className="font-extralight text-indigo-50 text-sm capitalize w-[4.6rem]">Location:</h2>
+                        <p className="font-extralight text-indigo-50 text-sm capitalize">{props.location}</p>
+                        </div>
+                        <div className="flex gap-1">
+                        <h2 className="font-extralight text-indigo-50 text-sm capitalize w-[4.6rem]">Date:</h2>
+                        <p className="font-extralight text-indigo-50 text-sm capitalize">{props.date}</p>
+                        </div>
+                        <div className="flex gap-1">
+                        <h2 className="font-extralight text-indigo-50 text-sm capitalize w-[4.6rem]">Detail: </h2>
+                        <p className="font-extralight text-indigo-50 text-sm text-ellipsis overflow-hidden whitespace-wrap">{props.detail}</p>
+                        </div>
                     </div>
-                    <div className="flex justify-end items-end gap-5 px-5">
+                    {/* {props.type === "incoming" &&
+                        <div className="flex justify-evenly ">
+                            <div className="bg-green-200 p-4 w-full text-center font-semibold hover:bg-green-400 transition-colors cursor-pointer">Accept</div>
+                            <div className="bg-red-200 p-4 w-full text-center font-semibold hover:bg-red-400 transition-colors cursor-pointer">Decline</div>
+                        </div>
+                    }
+                    {props.type === "outgoing" && 
+                        <div className="flex justify-evenly ">
+                            <div className="bg-indigo-300 p-4 w-full text-center font-semibold hover:bg-indigo-500 transition-colors cursor-pointer">Edit</div>
+                            <div className="bg-red-200 p-4 w-full text-center font-semibold hover:bg-red-400 transition-colors cursor-pointer">Delete</div>
+                        </div>
+                    } */}
+                    {/* <div className="flex justify-end items-end gap-5 px-5">
                         <div><img className="w-5 invert" src={editIcon} alt="Edit" /></div>
                         <div><img className="w-5 invert" src={deleteIcon} alt="Delete" /></div>
-                    </div>
+                    </div> */}
                 </div>
+                <div className="p-4 h-48 bg-teal-600 flex items-center text-indigo-50 font-semibold hover:bg-teal-900 transition-all cursor-pointer">Accept</div>
             </div>
     )
 }
@@ -109,7 +155,7 @@ const EventCard = (props) => {
             </div>
             <div className="flex-1 flex-col flex gap-3">
                 <div className="flex flex-col gap-1 justify-center items-center ">
-                    <h2 className=" text-center font-semibold text-indigo-50">{props.name}</h2>
+                    <h2 className="text-center font-semibold text-indigo-50">{props.name}</h2>
                     <p className=" font-extralight text-indigo-50 text-sm ">{props.location}</p>
                     <p className=" font-extralight text-indigo-50 text-sm ">{props.timestamp}</p>
                 </div>
@@ -129,7 +175,7 @@ const Events = (props) => {
             <div className="p-4 flex justify-center items-center relative">
                 <Link to="/home/add" className="absolute left-3"><img src={addIcon} className="w-8 invert" alt="" /></Link>
                 <h1 className="text-indigo-50 font-semibold text-xl">
-                    You have {props.eventInfo ? props.eventInfo.length : "no"} upcoming events.
+                    You have {props.eventInfo ? props.eventInfo.length : "no"} public events.
                 </h1>
             </div>
             <div className="bg-indigo-50 flex flex-col gap-1 items-center">

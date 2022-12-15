@@ -27,7 +27,7 @@ export default function NavBar(props) {
                 <div className={props.visible === true ? "bg-indigo-900 absolute w-60 z-20 top-16 left-0 opacity-100 shadow-2xl shadow-black transition-all duration-300 ease-in-out rounded-2xl flex flex-col box-content m-2 overflow-hidden" : "flex flex-col box-content m-2 overflow-hidden bg-indigo-900 rounded-2xl absolute opacity-0 -z-50 w-60 top-16 -left-60 duration-300 shadow-2xl shadow-black transition-all ease-in-out"}>
                     <div className="bg-indigo-100 flex flex-col justify-center items-center">
                         <div className="h-32 w-32 m-4 box-content rounded-full bg-indigo-900 ">
-                            <img className="overflow-hidden rounded-full" src={props.userInfo.avatar_url} alt="" />
+                            <img className="overflow-hidden rounded-full h-full w-full object-cover" src={props.userInfo.avatar_url} alt="" />
                         </div>
                         <div className="pb-4 px-4 select-none">
                             <h1 className="text-indigo-900 text-lg font-semibold">{props.userInfo.name}</h1>

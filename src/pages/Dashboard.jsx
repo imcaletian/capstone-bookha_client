@@ -1,7 +1,7 @@
 import PageHeader from "../components/PageHeader/PageHeader"
 import { useState, useEffect } from "react";
 import supabase from "../supabaseClient";
-import { useNavigate, Routes, Route } from "react-router-dom";
+import { useNavigate, Routes, Route, Link, Navigate } from "react-router-dom";
 import DashboardSection from "../components/DashboardCard";
 import Modal from "../components/Modal";
 import AddNewEvent from "./AddNewEvent";
@@ -10,8 +10,8 @@ import AddNewEvent from "./AddNewEvent";
 const Dashboard = () => {
     const nav = useNavigate ()
     const id = localStorage.getItem("bookem_user_id")
-    
-    if (!id) {
+    const token = localStorage.getItem("bookem_token")
+    if (!token) {
         nav ("/")
     }
     const defaultDate = new Date();
@@ -66,7 +66,7 @@ const Dashboard = () => {
             const {data, error} = await supabase
             .from ('requests')
             .select('*')
-            .eq('sent_to', [`${id}`])
+            .eq('sent_to', [id])
             if (error) {
                 console.log("could not fetch request info")
             }
@@ -75,29 +75,29 @@ const Dashboard = () => {
             }
         }
         fetchRequests()
-    }, [id])
+    }, [])
 
     useEffect (()=> {
         const fetchSentRequests = async () => {
             const {data, error} = await supabase
             .from ('requests')
             .select('*')
-            .eq('created_by', [`${id}`])
+            .eq('created_by', id)
             if (error) {
-                console.log("could not fetch request info")
+                console.log(error)
             }
             if (data) {
                 SetSentRequests(data)
             }
         }
         fetchSentRequests()
-    }, [id])
+    }, [])
 
-
+    console.log(sentRequests)
     return (
         <>
         { artistInfo && 
-            (<div className="bg-indigo-800 h-max">
+            <div className="bg-indigo-800 h-max">
             <PageHeader userInfo={artistInfo}/>
             <div className="flex flex-wrap justify-center items-center ">
             <Routes>
@@ -105,11 +105,15 @@ const Dashboard = () => {
                 <Route path="/add" element={<AddNewEvent artistInfo={artistInfo}/>} />
             </Routes>
             </div>
-            </div>)
+            </div>
         }
         {
             !artistInfo && 
-            nav('/setup')
+            <div className="bg-indigo-800 h-screen justify-center items-center flex flex-col select-none">
+                <h1 className="text-indigo-50 font-semibold text-2xl animate-bounce">Welcome to BookEm!</h1>
+                <p className="text-indigo-50">A easy way to showcase your events and bookings</p>
+                <Link to="/setup" className="p-3 m-10 rounded-xl bg-indigo-900 text-lg font-semibold text-indigo-50 hover:bg-indigo-50 hover:border-4 hover:shadow-lg hover:text-indigo-900 transition-all"><div>Let's get you set up!</div></Link>
+            </div>
         }
         </>
     )
