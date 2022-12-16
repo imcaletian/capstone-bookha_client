@@ -5,7 +5,7 @@ const ActionBar = () => {
     return (
         <div className="flex items-center h-16 bg-indigo-800">
             <Btn text="Events" path="./" />
-            <Btn text="Request" path="./request" />
+            <Btn text="Requests" path="./request" />
             {/* <Btn text="Contact" path="./contact" /> */}
         </div>
     )

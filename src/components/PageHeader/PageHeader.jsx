@@ -13,7 +13,6 @@ const PageHeader = (props) => {
             setNav(true)
         }
     }
-    console.log(props)
     return (
         <>
             {props.userInfo &&

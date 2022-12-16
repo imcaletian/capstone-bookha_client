@@ -28,7 +28,6 @@ const Dashboard = () => {
                 .from('artists')
                 .select('*')
                 .eq('id', id)
-
             if (error) {
                 setFetchError('Could Not Fetch Artist Info')
                 setArtistInfo(null)
@@ -93,7 +92,6 @@ const Dashboard = () => {
         fetchSentRequests()
     }, [])
 
-    console.log(sentRequests)
     return (
         <>
         { artistInfo && 
