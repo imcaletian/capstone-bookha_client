@@ -52,7 +52,7 @@ function ArtistPage () {
             }
         }
         fetchArtistInfo()
-    }, [])
+    }, [id])
 
     useEffect(() => {
         const fetchEventInfo = async () => {
@@ -71,7 +71,7 @@ function ArtistPage () {
             }
         }
         fetchEventInfo()
-    }, [])
+    }, [id])
 
 
     return (
@@ -82,7 +82,7 @@ function ArtistPage () {
         <Routes>
             <Route element={<EventList eventInfo={eventInfo} />} path='/' />
             <Route path='/request' element={<Request userInfo={userInfo} localId={localId} artistInfo={artistInfo} />} />
-            <Route path='/contact' element={<h1>Not Available</h1>} />
+            {/* <Route path='/contact' element={<h1>Not Available</h1>} /> */}
         </Routes>
         </div>
     )
