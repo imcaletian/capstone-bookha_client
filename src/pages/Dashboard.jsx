@@ -101,7 +101,7 @@ const Dashboard = () => {
             <PageHeader userInfo={artistInfo}/>
             <div className="flex flex-wrap justify-center items-center ">
             <Routes>
-                <Route path="/" element={<DashboardSection eventInfo={eventInfo} artistInfo={artistInfo} requestsInfo={requestsInfo} sentRequests={sentRequests}/>} />
+                <Route path="/*" element={<DashboardSection eventInfo={eventInfo} artistInfo={artistInfo} requestsInfo={requestsInfo} sentRequests={sentRequests}/>} />
                 <Route path="/add" element={<AddNewEvent artistInfo={artistInfo}/>} />
             </Routes>
             </div>
