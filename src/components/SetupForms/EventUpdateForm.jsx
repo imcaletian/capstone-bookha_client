@@ -80,7 +80,7 @@ const EventUpdateForm = (props) => {
         <>
         <div className="w-full h-16 bg-indigo-900 flex justify-center items-center font-semibold text-indigo-50 text-xl">Update Event</div>
         <form onSubmit={formik.handleSubmit}>
-            <div className="flex flex-col gap-3 max-w-xl mx-10 my-2 [&>label]:text-indigo-900 [&>label]:select-none [&>label]:font-semibold [&>input]:p-2 [&>input]:rounded-lg ">
+            <div className="flex flex-col gap-3 py-4 max-w-xl mx-10 my-2 [&>label]:text-indigo-900 [&>label]:select-none [&>label]:font-semibold [&>input]:p-2 [&>input]:rounded-lg ">
                 <label>
                     Event Name
                 </label>
@@ -96,8 +96,8 @@ const EventUpdateForm = (props) => {
             </div>
 
             <div className="flex justify-evenly w-full mt-10">
-                <input className="p-4 bg-teal-600 w-1/2 font-semibold hover:bg-teal-900 text-indigo-50 transition-all cursor-pointer" type="submit" value="Update" />
-                <div className="p-4 text-center bg-rose-600 w-1/2 font-semibold hover:bg-rose-900 text-indigo-50 transition-all cursor-pointer" onClick={()=> deleteEvent()}>Delete</div>
+                <input className="p-4 bg-indigo-900 w-1/2 font-semibold hover:bg-teal-700 text-indigo-50 transition-all cursor-pointer rounded-none" type="submit" value="Update" />
+                <div className="p-4 text-center bg-indigo-900 w-1/2 font-semibold hover:bg-rose-700 text-indigo-50 transition-all cursor-pointer" onClick={()=> deleteEvent()}>Delete</div>
             </div>
         </form>
         </>

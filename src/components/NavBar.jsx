@@ -37,7 +37,7 @@ export default function NavBar(props) {
                         <Link to="/home" onClick={props.navShow}> 
                             <div className="p-5 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-indigo-800 ">Home</div>
                         </Link>
-                        <Link to={`/artist/${props.userInfo.username}`} onClick={props.navShow}>
+                        <Link to={`/${props.userInfo.username}`} onClick={props.navShow}>
                             <div className="p-5 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-indigo-800">My Artist Page</div>
                         </Link>
                         <Link to="/setup" onClick={props.navShow}>
@@ -46,7 +46,7 @@ export default function NavBar(props) {
                             </div>
                         </Link> 
                         <Link onClick={LogoutHandler}>
-                            <div className="p-5 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-red-600">
+                            <div className="p-5 bg-indigo-900 text-indigo-50 font-semibold hover:bg-indigo-100 hover:text-rose-700">
                                 Log Out
                             </div>
                         </Link>
