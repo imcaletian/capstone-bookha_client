@@ -3,17 +3,18 @@ import editIcon from "../assets/pen-to-square-solid.svg"
 import addIcon from "../assets/square-plus-solid.svg"
 import { useState, useRef } from "react"
 import Modal from "./Modal"
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
+import { Link, Route, Routes } from "react-router-dom"
 import { useEffect } from "react"
 import supabase from "../supabaseClient"
 import Btn from "./CTAButton/Btn"
+import EventUpdateForm from "./SetupForms/EventUpdateForm"
 
 
 const ActionBar = () => {
     return (
         <div className="flex items-center h-16 bg-indigo-900">
-            <Btn text="Events" path="./" />
-            <Btn text="Request" path="./request" />
+            <Btn text="Upcoming" path="./" />
+            <Btn text="Requests" path="./request" />
         </div>
     )
 }
@@ -25,7 +26,7 @@ const DashboardSection = (props) => {
         <ActionBar />
         <Routes>
             <Route path="/" element={
-            <Card><Events eventInfo={props.eventInfo} /></Card>
+            <Card><Events eventInfo={props.eventInfo} artistInfo={props.artistInfo}/></Card>
             } />
             <Route path="/request" element={
                 <>
@@ -38,9 +39,7 @@ const DashboardSection = (props) => {
                 </>
             } />
             </Routes>
-
         </div>
-
     )
 }
 
@@ -117,14 +116,13 @@ const RequestCard = (props) => {
             }
             if (data) {
                 setUserName(data[0])
-                console.log(data[0])
             }
         }
         getUserInfo()
     }, [props.created_by])
 
     return (
-        <div className="flex items-center rounded-2xl m-3 shadow-lg bg-indigo-800 overflow-hidden h-48" id={props.id} >
+        <div className="flex items-center rounded-2xl m-3 shadow-lg bg-indigo-800 overflow-hidden h-24" id={props.id} >
                 {props.type === "incoming" &&
                     <div className="p-4 h-48 bg-rose-600 flex justify-center items-center text-indigo-50 font-semibold hover:bg-rose-900 transition-all cursor-pointer w-[5.25rem]">Decline</div>
                 }
@@ -181,7 +179,7 @@ const RequestCard = (props) => {
 const EventCard = (props) => {
     
     return (
-        <div className="flex flex-row items-center bg-indigo-800 rounded-2xl m-2 w-[95%] gap-2 overflow-hidden h-36 shadow-xl hover:bg-indigo-900 transition-all max-w-xl cursor-pointer" id={props.id}>
+        <div className="flex flex-row items-center bg-indigo-800 rounded-2xl m-2 w-[95%] gap-2 overflow-hidden h-36 shadow-xl hover:bg-indigo-900 transition-all max-w-xl cursor-pointer" id={props.id} onClick={props.onClick}>
             <div className="w-36 h-full overflow-hidden shadow-2xl">
                 <img src={props.img} className="object-cover h-full w-full" alt="event photo" />
             </div>
@@ -197,7 +195,9 @@ const EventCard = (props) => {
     )
 }
 
-const Events = (props) => {
+const Events = (props) => { 
+    const [modal, setModal] = useState (false)
+    const [editId, setEditId] = useState ('')
     return (
         <div className="w-full">
             <div className="p-4 flex justify-center items-center relative">
@@ -206,14 +206,24 @@ const Events = (props) => {
                     You have {props.eventInfo ? props.eventInfo.length : "no"} public events.
                 </h1>
             </div>
-            <div className="bg-indigo-50 flex flex-col gap-1 items-center">
+            <div className="bg-indigo-50 flex flex-col gap-1 items-center py-1">
                 {props.eventInfo !== null ? props.eventInfo
                     .map((item) => {
                         const date = new Date (item.timestamp)
                         const dateFormatted = date.toLocaleString()                    
-                        return <EventCard name={item.event_name} key={item.id} id={item.id} timestamp={dateFormatted} location={item.location} link={item.link} img={item.imgUrl} />
+                        return <EventCard 
+                        onClick={()=> {setEditId(item.id)
+                            setModal(true)
+                        }
+                    } 
+                        timestamp={dateFormatted} name={item.event_name} key={item.id} location={item.location} link={item.link} img={item.imgUrl} />
                     }) : "Loading Event"}
             </div>
+            <Modal setModal={setModal} visible={modal} id={editId} artistInfo={props.artistInfo} >
+                    <div>
+                        <EventUpdateForm artistInfo={props.artistInfo} id={editId} setModal={setModal}/>
+                    </div>
+            </Modal>
         </div>
     )
 }
@@ -222,7 +232,7 @@ const Events = (props) => {
 
 const Card = ({ children }) => {
     return (
-        <div className="flex flex-row items-center bg-indigo-600 rounded-2xl my-3 mx-2 overflow-hidden shadow-xl ">
+        <div className="flex flex-row items-center bg-indigo-600 rounded-2xl my-3 mx-2 overflow-hidden shadow-lg shadow-slate-400">
             {children}
         </div>
     )

@@ -19,7 +19,6 @@ export default function NavBar(props) {
             props.navShow()
         }
     }
-    console.log(props)
     return (
         <>
             {
