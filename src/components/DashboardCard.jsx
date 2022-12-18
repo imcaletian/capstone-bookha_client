@@ -387,15 +387,13 @@ const Events = (props) => {
             <div className="bg-indigo-50 flex flex-col gap-1 items-center">
                 {props.eventInfo !== null ? props.eventInfo
                     .map((item) => {
-                        const date = new Date(item.timestamp)
-                        const dateFormatted = date.toLocaleString()
                         return <EventCard
                             onClick={() => {
                                 setEditId(item.id)
                                 setModal(true)
                             }
                             }
-                            timestamp={dateFormatted} name={item.event_name} key={item.id} location={item.location} link={item.link} img={item.imgUrl} />
+                            timestamp={item.timestamp} name={item.event_name} key={item.id} location={item.location} link={item.link} img={item.imgUrl} />
                     }) : "Loading Event"}
             </div>
             <Modal setModal={setModal} visible={modal} id={editId} artistInfo={props.artistInfo} >
