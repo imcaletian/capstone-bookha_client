@@ -20,6 +20,7 @@ const Dashboard = () => {
     const [eventInfo, setEventInfo] = useState(null);
     const [artistInfo, setArtistInfo] = useState(null);
     const [requestsInfo, SetRequestInfo] = useState(null);
+    const [approvedRequestsInfo, SetApprovedRequestInfo] = useState(null);
     const [sentRequests, SetSentRequests] = useState(null);
     const now = defaultDate.toISOString();
     useEffect(() => {
@@ -66,6 +67,7 @@ const Dashboard = () => {
             .from ('requests')
             .select('*')
             .eq('sent_to', [id])
+            .is('approved', false)
             if (error) {
                 console.log("could not fetch request info")
             }
@@ -75,6 +77,24 @@ const Dashboard = () => {
         }
         fetchRequests()
     }, [])
+
+    useEffect (()=> {
+        const fetchApprovedRequests = async () => {
+            const {data, error} = await supabase
+            .from ('requests')
+            .select('*')
+            .eq('sent_to', [id])
+            .is('approved', true)
+            if (error) {
+                console.log("could not fetch request info")
+            }
+            if (data) {
+                SetApprovedRequestInfo(data)
+            }
+        }
+        fetchApprovedRequests()
+    }, [])
+
 
     useEffect (()=> {
         const fetchSentRequests = async () => {
@@ -99,7 +119,7 @@ const Dashboard = () => {
             <PageHeader userInfo={artistInfo}/>
             <div className="flex flex-wrap justify-center items-center ">
             <Routes>
-                <Route path="/*" element={<DashboardSection eventInfo={eventInfo} artistInfo={artistInfo} requestsInfo={requestsInfo} sentRequests={sentRequests}/>} />
+                <Route path="/*" element={<DashboardSection eventInfo={eventInfo} artistInfo={artistInfo} requestsInfo={requestsInfo} sentRequests={sentRequests} approvedRequestsInfo={approvedRequestsInfo} />} />
                 <Route path="/add" element={<AddNewEvent artistInfo={artistInfo}/>} />
             </Routes>
             </div>

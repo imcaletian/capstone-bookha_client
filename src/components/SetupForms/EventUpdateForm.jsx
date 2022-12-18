@@ -98,7 +98,7 @@ const EventUpdateForm = (props) => {
             <div className="flex justify-evenly w-full mt-10">
                 <input className="p-4 bg-indigo-900 w-1/2 font-semibold hover:bg-teal-700 text-indigo-50 transition-all cursor-pointer rounded-none" type="submit" value="Update" />
                 <div className="p-4 text-center bg-indigo-900 w-1/2 font-semibold hover:bg-rose-700 text-indigo-50 transition-all cursor-pointer" 
-                onClick={()=> {deleteEvent()
+                onClick={()=> {deleteEvent();
                     props.setModal(false)}
                 }>Delete</div>
             </div>
