@@ -6,6 +6,7 @@ import Request from '../components/Request'
 import supabase from '../supabaseClient'
 import { useState, useEffect } from 'react'
 import { Routes, Route, useParams } from "react-router-dom"
+import Timestamp from 'react-timestamp'
 
 function ArtistPage () {
     const localId = localStorage.getItem("bookem_user_id")

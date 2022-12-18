@@ -97,11 +97,11 @@ const Request = (props) => {
             }
             {!props.userInfo &&
                 <div>
-                    <div className="w-full h-full bg-indigo-900 z-20 absolute opacity-100 flex items-center justify-start bg-opacity-60 flex-col">
-                        <p className="text-white font-semibold p-24">You need to login in order to make a booking request.</p>
-                        <Link to="/"><div className="px-8 py-2 w-fit border-2 h-fit rounded-xl font-semibold bg-indigo-50">Login</div></Link>
+                    <div className="w-full h-[45rem] py-5 bg-indigo-50 z-20 absolute opacity-100 flex items-center justify-start bg-opacity-60 flex-col">
+                        <p className="text-indigo-900 font-semibold p-24">You need to login in order to make a booking request.</p>
+                        <Link to="/"><div className="px-12 py-4 w-fit border-2 h-fit rounded-xl font-semibold bg-indigo-800 text-indigo-50 hover:bg-indigo-900 transition-all">Login</div></Link>
                     </div>
-                    <div className="bg-indigo-50 h-full py-10 " >
+                    <div className="bg-indigo-50 h-full py-10" >
                         <div className="flex justify-center flex-col items-center blur-sm">
                             <h1 className="font-semibold py-4">Make a request</h1>
                             <form className="flex flex-col items-center" onSubmit={formik.handleSubmit}>

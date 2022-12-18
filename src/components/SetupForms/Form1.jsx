@@ -121,14 +121,14 @@ function Form1(props) {
     return (
         <form className="flex flex-col gap-2 mx-10 p-10 max-w-xl [&>label]:text-indigo-900 [&>label]:select-none [&>label]:font-semibold [&>input]:p-2 [&>input]:rounded-lg" onSubmit={formik.handleSubmit} >
             <div className="flex items-center justify-center">
-            <label className={!url && `cursor-pointer p-2 w-48 aspect-square flex justify-center items-center border-2 border-indigo-50 rounded-xl`}>
+            <label className={!url && `cursor-pointer p-2 w-48 aspect-square flex justify-center items-center border-2 border-indigo-50 rounded-full`}>
             <p className={!url ? `font-semibold text-indigo-900` : `hidden`}>Add Image</p>
             <input className="hidden" type="file" accept="image/*" onChange={e => setImg(e.target.files[0])}/>
             </label>
             </div>
             {url && <div className="flex flex-col items-center gap-2 hover:brightness-75 transition-all relative w-48 self-center cursor-pointer" onClick={()=> {setUrl(null)}}>
             <div className="absolute flex justify-center items-center opacity-0 hover:opacity-100 w-full h-full transition-all text-white font-bold text-4xl text-center">Update<br/>Photo</div>
-            <img src={url} title="Photo" alt="" className="rounded-xl w-48" />
+            <img src={url} title="Photo" alt="" className="rounded-full w-48" />
             </div>}
             <label>
                 Display Name
