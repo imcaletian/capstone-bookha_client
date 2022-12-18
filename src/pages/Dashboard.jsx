@@ -50,7 +50,6 @@ const Dashboard = () => {
             .contains('username', [`${artistInfo.username}`])
             .gt('timestamp', now)
             .order ('timestamp', { ascending: true })
-
             if (error) {
                 console.log("could not fetch event info")
             }

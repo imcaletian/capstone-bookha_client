@@ -293,7 +293,7 @@ const SentRequests = (props) => {
                         .map((item) => {
                             const date = new Date(item.request_timestamp)
                             const dateFormatted = date.toLocaleString()
-                            return <RequestCard key={item.request_id} id={item.request_id} date={dateFormatted} location={item.location} detail={item.description} created_by={item.sent_to} approved={item.approved} text="To" type="outgoing" />
+                            return <RequestCard key={item.request_id} id={item.request_id} date={item.request_timestamp} location={item.location} detail={item.description} created_by={item.sent_to} approved={item.approved} text="To" type="outgoing" />
                         }) : ""}
             </div>
         </div>
