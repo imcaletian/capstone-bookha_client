@@ -17,13 +17,16 @@ const Dashboard = () => {
     const defaultDate = new Date();
     const [date, setDate] = useState(defaultDate);
     const [fetchError, setFetchError] = useState(null);
+    const [loading, setLoading] = useState (false);
     const [eventInfo, setEventInfo] = useState(null);
     const [artistInfo, setArtistInfo] = useState(null);
     const [requestsInfo, SetRequestInfo] = useState(null);
     const [approvedRequestsInfo, SetApprovedRequestInfo] = useState(null);
     const [sentRequests, SetSentRequests] = useState(null);
     const now = defaultDate.toISOString();
+
     useEffect(() => {
+        setLoading(true)
         const fetchArtistInfo = async () => {
             const { data, error } = await supabase
                 .from('artists')
@@ -36,6 +39,7 @@ const Dashboard = () => {
             if (data) {
                 setArtistInfo(data[0])
                 setFetchError(null)
+                setLoading(false)
             }
         }
         fetchArtistInfo()
@@ -43,6 +47,7 @@ const Dashboard = () => {
 
 
     useEffect(() => {
+
         const fetchEventInfo = async () => {
             const { data, error } = await supabase
             .from ('artist_events')
@@ -57,7 +62,9 @@ const Dashboard = () => {
                 setEventInfo(data)
             }
         }
-        fetchEventInfo()
+        if (artistInfo) {
+            fetchEventInfo()
+        } 
     }, [artistInfo])
 
     useEffect (()=> {
