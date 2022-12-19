@@ -94,7 +94,6 @@ function Landing() {
 
     return (
         <div className="h-screen w-screen flex flex-col justify-center items-center bg-indigo-800">
-           
             <Link to="/"><div className="py-10">
                 <h1 className="text-3xl font-semibold text-indigo-50">Bookem</h1>
             </div></Link>
