@@ -120,7 +120,7 @@ const Dashboard = () => {
 
     return (
         <>
-        { artistInfo && 
+        { artistInfo !== null && 
             <div className="bg-indigo-800 h-max">
             <PageHeader userInfo={artistInfo}/>
             <div className="flex flex-wrap justify-center items-center ">
